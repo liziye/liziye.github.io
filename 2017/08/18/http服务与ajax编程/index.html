@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="服务器 前言：通俗的讲，能够提供某种服务的机器（计算机）称为服务器  服务器软件 使计算机具备提供某种服务能力的应用软件，称为服务器软件，通过安装相应的服务软件，然后进行配置后就可以使计算具备了提供某种服务的能力。  常见的服务器软件有：  文件服务器：Server-U、FileZilla、VsFTP等（FTP是File Transfer Protocol文件传输协议）； 数据库服务器：oracl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="洒脱">
+<meta property="og:url" content="http://yoursite.com/2017/08/18/http服务与ajax编程/index.html">
+<meta property="og:site_name" content="洒脱">
+<meta property="og:description" content="服务器 前言：通俗的讲，能够提供某种服务的机器（计算机）称为服务器  服务器软件 使计算机具备提供某种服务能力的应用软件，称为服务器软件，通过安装相应的服务软件，然后进行配置后就可以使计算具备了提供某种服务的能力。  常见的服务器软件有：  文件服务器：Server-U、FileZilla、VsFTP等（FTP是File Transfer Protocol文件传输协议）； 数据库服务器：oracl">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/01.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/02.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/03.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/04.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/05.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/06.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/phpstudy.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/install.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/iis.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/vc9.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/fhq.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/index.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/async_time.png">
+<meta property="og:updated_time" content="2017-06-30T02:36:51.984Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="洒脱">
+<meta name="twitter:description" content="服务器 前言：通俗的讲，能够提供某种服务的机器（计算机）称为服务器  服务器软件 使计算机具备提供某种服务能力的应用软件，称为服务器软件，通过安装相应的服务软件，然后进行配置后就可以使计算具备了提供某种服务的能力。  常见的服务器软件有：  文件服务器：Server-U、FileZilla、VsFTP等（FTP是File Transfer Protocol文件传输协议）； 数据库服务器：oracl">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/18/http服务与ajax编程/image/01.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>洒脱</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">洒脱</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/08/17/JS/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/18/http服务与ajax编程/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&text="><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&is_video=false&description="><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://yoursite.com/2017/08/18/http服务与ajax编程/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&name=&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#服务器"><span class="toc-number">1.</span> <span class="toc-text">服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器软件"><span class="toc-number">1.1.</span> <span class="toc-text">服务器软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器类型"><span class="toc-number">1.2.</span> <span class="toc-text">服务器类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP服务器"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器总结"><span class="toc-number">1.4.</span> <span class="toc-text">服务器总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#客户端"><span class="toc-number">2.</span> <span class="toc-text">客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端软件"><span class="toc-number">2.1.</span> <span class="toc-text">客户端软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器与客户端的关系"><span class="toc-number">2.2.</span> <span class="toc-text">服务器与客户端的关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#软件架构"><span class="toc-number">3.</span> <span class="toc-text">软件架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CS架构"><span class="toc-number">3.1.</span> <span class="toc-text">CS架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BS架构"><span class="toc-number">3.2.</span> <span class="toc-text">BS架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络基础"><span class="toc-number">4.</span> <span class="toc-text">网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址"><span class="toc-number">4.1.</span> <span class="toc-text">ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名"><span class="toc-number">4.2.</span> <span class="toc-text">域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS服务器"><span class="toc-number">4.3.</span> <span class="toc-text">DNS服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端口"><span class="toc-number">4.4.</span> <span class="toc-text">端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地hosts"><span class="toc-number">4.5.</span> <span class="toc-text">本地hosts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建HTTP服务器"><span class="toc-number">5.</span> <span class="toc-text">搭建HTTP服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy介绍"><span class="toc-number">5.1.</span> <span class="toc-text">phpStudy介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy的安装"><span class="toc-number">5.2.</span> <span class="toc-text">phpStudy的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy的错误解决"><span class="toc-number">5.3.</span> <span class="toc-text">phpStudy的错误解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iis服务器"><span class="toc-number">5.3.1.</span> <span class="toc-text">关闭iis服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提示缺少vc9-库文件"><span class="toc-number">5.3.2.</span> <span class="toc-text">提示缺少vc9 库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭防火墙"><span class="toc-number">5.3.3.</span> <span class="toc-text">关闭防火墙</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy的配置"><span class="toc-number">5.4.</span> <span class="toc-text">phpStudy的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改网站目录与默认首页"><span class="toc-number">5.4.1.</span> <span class="toc-text">修改网站目录与默认首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟主机配置"><span class="toc-number">5.4.2.</span> <span class="toc-text">虚拟主机配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP基础"><span class="toc-number">6.</span> <span class="toc-text">PHP基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#php初体验"><span class="toc-number">6.1.</span> <span class="toc-text">php初体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">6.2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">6.3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单数据类型"><span class="toc-number">6.3.1.</span> <span class="toc-text">简单数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">6.3.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">6.3.3.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">6.3.4.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">6.4.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断语句"><span class="toc-number">6.4.1.</span> <span class="toc-text">判断语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环语句"><span class="toc-number">6.4.2.</span> <span class="toc-text">循环语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表单处理"><span class="toc-number">6.5.</span> <span class="toc-text">表单处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件上传"><span class="toc-number">6.5.1.</span> <span class="toc-text">文件上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP常用函数"><span class="toc-number">6.6.</span> <span class="toc-text">PHP常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态页面"><span class="toc-number">6.7.</span> <span class="toc-text">动态页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用php动态渲染页面"><span class="toc-number">6.7.1.</span> <span class="toc-text">使用php动态渲染页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include"><span class="toc-number">6.7.2.</span> <span class="toc-text">include</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.8.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http协议"><span class="toc-number">7.</span> <span class="toc-text">http协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求与请求报文"><span class="toc-number">7.1.</span> <span class="toc-text">请求与请求报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应与响应报文"><span class="toc-number">7.2.</span> <span class="toc-text">响应与响应报文</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AJAX"><span class="toc-number">8.</span> <span class="toc-text">AJAX</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同步与异步"><span class="toc-number">8.1.</span> <span class="toc-text">同步与异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest"><span class="toc-number">8.2.</span> <span class="toc-text">XMLHttpRequest</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#发送get请求"><span class="toc-number">8.2.1.</span> <span class="toc-text">发送get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送post请求"><span class="toc-number">8.2.2.</span> <span class="toc-text">发送post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取响应"><span class="toc-number">8.2.3.</span> <span class="toc-text">获取响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-number">8.2.4.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据交互"><span class="toc-number">8.3.</span> <span class="toc-text">数据交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XML"><span class="toc-number">8.3.1.</span> <span class="toc-text">XML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON数据"><span class="toc-number">8.3.2.</span> <span class="toc-text">JSON数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#php处理json"><span class="toc-number">8.3.2.1.</span> <span class="toc-text">php处理json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS处理json"><span class="toc-number">8.3.2.2.</span> <span class="toc-text">JS处理json</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval方法"><span class="toc-number">8.3.3.</span> <span class="toc-text">eval方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性处理"><span class="toc-number">8.4.</span> <span class="toc-text">兼容性处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封装ajax工具函数"><span class="toc-number">8.5.</span> <span class="toc-text">封装ajax工具函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参数提取"><span class="toc-number">8.5.1.</span> <span class="toc-text">参数提取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数检测"><span class="toc-number">8.5.2.</span> <span class="toc-text">参数检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整版"><span class="toc-number">8.5.3.</span> <span class="toc-text">完整版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery中的ajax方法"><span class="toc-number">8.6.</span> <span class="toc-text">jQuery中的ajax方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax"><span class="toc-number">8.6.1.</span> <span class="toc-text">$.ajax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他api"><span class="toc-number">8.6.2.</span> <span class="toc-text">其他api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口化开发"><span class="toc-number">8.6.3.</span> <span class="toc-text">接口化开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取短信验证码接口"><span class="toc-number">8.6.3.1.</span> <span class="toc-text">获取短信验证码接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注册接口"><span class="toc-number">8.6.3.2.</span> <span class="toc-text">注册接口</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模板引擎"><span class="toc-number">9.</span> <span class="toc-text">模板引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要使用模板引擎"><span class="toc-number">9.1.</span> <span class="toc-text">为什么要使用模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的模板引擎"><span class="toc-number">9.2.</span> <span class="toc-text">常见的模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#artTemplate的使用"><span class="toc-number">9.3.</span> <span class="toc-text">artTemplate的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#artTemplate入门"><span class="toc-number">9.3.1.</span> <span class="toc-text">artTemplate入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#artTemplate语法"><span class="toc-number">9.3.2.</span> <span class="toc-text">artTemplate语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#瀑布流案例"><span class="toc-number">10.</span> <span class="toc-text">瀑布流案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#同源与跨域"><span class="toc-number">11.</span> <span class="toc-text">同源与跨域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#综合案例"><span class="toc-number">12.</span> <span class="toc-text">综合案例</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">洒脱</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-18T11:18:59.280Z" itemprop="datePublished">2017-08-18</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><blockquote>
+<p>前言：通俗的讲，能够提供某种服务的机器（计算机）称为服务器</p>
+</blockquote>
+<h2 id="服务器软件"><a href="#服务器软件" class="headerlink" title="服务器软件"></a>服务器软件</h2><blockquote>
+<p>使计算机具备提供某种服务能力的应用软件，称为服务器软件，<br>通过安装相应的服务软件，然后进行配置后就可以使计算具备了提供某种服务的能力。</p>
+</blockquote>
+<p>常见的服务器软件有：</p>
+<ol>
+<li>文件服务器：Server-U、FileZilla、VsFTP等（FTP是File Transfer Protocol文件传输协议）；</li>
+<li>数据库服务器：oracle、mysql、SQL server、DB2、ACCESS等；</li>
+<li>邮件服务器：Postfix、Sendmail等；</li>
+<li><strong>HTTP服务器</strong>：Apache、Nginx、IIS、Tomcat、NodeJS等；</li>
+</ol>
+<h2 id="服务器类型"><a href="#服务器类型" class="headerlink" title="服务器类型"></a>服务器类型</h2><ol>
+<li>按<strong>服务类型</strong>可分为：文件服务器、数据库服务器、邮件服务器、Web服务器等；</li>
+<li>按<strong>操作系统</strong>可分为：Linux服务器、Windows服务器等；</li>
+<li>按<strong>应用软件</strong>可分为 Apache服务器、Nginx 服务器、IIS服务器、Tomcat服务器、weblogic服务器、WebSphere服务器、boss服务器、 Node服务器等；</li>
+</ol>
+<h2 id="HTTP服务器"><a href="#HTTP服务器" class="headerlink" title="HTTP服务器"></a>HTTP服务器</h2><p>即网站服务器，主要提供文档(文本、图片、视频、音频)浏览服务，一般安装Apache、Nginx服务器软件。</p>
+<p>HTTP服务器可以结合某一编程语言处理业务逻辑，由此进行的开发，通常称之为<strong>服务端开发</strong>。 </p>
+<p>常见的运行在服务端的编程语言包括 php、java、.net、Python、Ruby、Perl等。  </p>
+<h2 id="服务器总结"><a href="#服务器总结" class="headerlink" title="服务器总结"></a>服务器总结</h2><ol>
+<li>服务器说白了就是计算机，通过安装了某些软件，就可以提供某些特定的服务器。</li>
+<li>根据服务器软件的功能，名称，安装的系统这些不同的标准，可以对服务器划分成不同的类型。</li>
+<li>HTTP服务器主要提供网站浏览服务，通常需要结合某种编程语言进行开发，我们通常称之为服务器开发。</li>
+<li>专业的服务器与计算机的区别<ol>
+<li>稳定性：服务器要求7*24不间断运行。</li>
+<li>性能：服务器能够同时响应更多客户端的请求。</li>
+<li>价格：服务器价格通常比普通计算机贵很多。</li>
+</ol>
+</li>
+</ol>
+<p><strong>台式服务器</strong></p>
+<p><img src="image/01.jpg" alt=""></p>
+<p><strong>机架服务器</strong></p>
+<p><img src="image/02.jpg" alt=""></p>
+<p><strong>机房</strong></p>
+<p><img src="image/03.jpg" alt=""></p>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><blockquote>
+<p>具有向服务器<strong>索取服务</strong>能力的终端，叫做客户端。</p>
+</blockquote>
+<ul>
+<li>客户端：电脑、平板、手机安装了客户端软件，就可以称为客户端</li>
+<li>客户端：安装客户端软件，<strong>索取服务</strong>的一方</li>
+<li>服务器：安装服务器软件，<strong>提供服务</strong>的一方</li>
+</ul>
+<h2 id="客户端软件"><a href="#客户端软件" class="headerlink" title="客户端软件"></a>客户端软件</h2><p>浏览器===&gt;索取<strong>网站服务浏览</strong>的软件</p>
+<p>迅雷===&gt;索取文件下载服务的软件</p>
+<p>铁路12306====&gt;索取火车票订购服务</p>
+<p>今日头条====&gt;索取新闻头条服务</p>
+<p>对于前端工程师而言，主要接触到的客户端软件就是<strong>浏览器</strong>，当然也可能会涉及大一些app开发。</p>
+<p>以浏览器为宿主环境，结合 HTML、CSS、Javascript等技术，而进行的一系列开发，通常称之为<strong>前端开发</strong>。</p>
+<h2 id="服务器与客户端的关系"><a href="#服务器与客户端的关系" class="headerlink" title="服务器与客户端的关系"></a>服务器与客户端的关系</h2><p><img src="image/04.png" alt=""></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. QQ聊天中服务器与客户端的交互过程</span></div><div class="line"><span class="comment">//2. QQ能够与微信进行聊天吗？为什么？</span></div></pre></td></tr></table></figure>
+<h1 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h1><blockquote>
+<p>软件架构可以分为BS架构与CS架构</p>
+</blockquote>
+<h2 id="CS架构"><a href="#CS架构" class="headerlink" title="CS架构"></a>CS架构</h2><p>Client/Server架构，即客户端/服务器架构。是大家所熟悉的软件体系结构。需要安装对应的客户端软件，才能获取响应的服务。</p>
+<p>常见的CS架构：</p>
+<p>​    QQ、LOL、微信等</p>
+<p>特点：</p>
+<ul>
+<li>需要安装才是使用</li>
+<li>性能高效，使用更加稳定和流畅</li>
+<li>开发和维护难度更大。</li>
+<li>需要更新</li>
+<li>需要兼容操作系统。</li>
+</ul>
+<h2 id="BS架构"><a href="#BS架构" class="headerlink" title="BS架构"></a>BS架构</h2><p>Broswer/Server架构，即浏览器/服务器架构。随着Internet的兴起，对CS结构的一种变化的结构。用户只需要安装浏览器即可。</p>
+<ul>
+<li>不需要安装，只需要浏览器即可。</li>
+<li>相比BS架构，性能相对较差，没有那么流畅和稳定。</li>
+<li>开发维护方便。</li>
+<li>不需要更新</li>
+<li>不用兼容操作系统。但是需要兼容浏览器。</li>
+</ul>
+<h1 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//思考：我写的代码，放到服务器后，同学们是如何访问到我的页面的？</span></div></pre></td></tr></table></figure>
+<h2 id="ip地址"><a href="#ip地址" class="headerlink" title="ip地址"></a>ip地址</h2><p>所谓IP地址就是给每个连接在互联网上的主机分配的一个32位地址。(就像每部手机能正常通话需要一个号码一样)</p>
+<p>通过ip就可以找到具体的某一台计算机。</p>
+<p>例 <code>192.168.1.110</code></p>
+<p>查看本机IP地址 <code>ping</code>、<code>ipconfig</code>、<code>ifconfig</code>（linux）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping <span class="number">192.168</span><span class="number">.1</span><span class="number">.110</span>  <span class="comment">//查看和某个同学的电脑是否连通</span></div></pre></td></tr></table></figure>
+<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>由于IP地址基于数字，不方便记忆，于是便用域名来代替IP地址，域名是一个IP地址的“面具”</p>
+<p>查看域名对应的IP地址 <code>ping</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping jd.com  <span class="comment">//可以获取到京东的ip</span></div></pre></td></tr></table></figure>
+<h2 id="DNS服务器"><a href="#DNS服务器" class="headerlink" title="DNS服务器"></a>DNS服务器</h2><p>DNS（Domain Name System）因特网上作为域名和IP地址相互映射的一个分布式数据库， 能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。</p>
+<p>简单的说就是记录IP地址和域名之间对应关系的服务。</p>
+<p>查找优先级 本机hosts文件、DNS服务器</p>
+<p>ipconfig /flushdns 刷新DNS</p>
+<p><img src="image/05.png" alt=""></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口号是计算机与外界通讯交流的出口，每个端口对应不同的服务。</p>
+<p>现实生活中，银行不同的窗口办理不同的业务。</p>
+<p>查看端口占用情况 netstat -an</p>
+<p>常见端口号 80、8080、3306、21、22</p>
+<h2 id="本地hosts"><a href="#本地hosts" class="headerlink" title="本地hosts"></a>本地hosts</h2><blockquote>
+<p>Hosts是一个没有扩展名的系统文件，可以用记事本等工具打开，其作用就是将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会<strong>首先自动从Hosts文件中寻找对应的IP地址</strong>，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//hosts文件的地址：C:\Windows\System32\drivers\etc</span></div><div class="line"><span class="comment">//在浏览器中输入www.taobao.com的执行过程。</span></div></pre></td></tr></table></figure>
+<p><img src="image/06.png" alt=""></p>
+<h1 id="搭建HTTP服务器"><a href="#搭建HTTP服务器" class="headerlink" title="搭建HTTP服务器"></a>搭建HTTP服务器</h1><h2 id="phpStudy介绍"><a href="#phpStudy介绍" class="headerlink" title="phpStudy介绍"></a>phpStudy介绍</h2><blockquote>
+<p>phpStudy是一个PHP调试环境的程序集成包。<br>该程序包集成最新的Apache+PHP+MySQL+phpMyAdmin,安装非常的简单</p>
+</blockquote>
+<p><img src="./image/phpstudy.png" alt=""></p>
+<h2 id="phpStudy的安装"><a href="#phpStudy的安装" class="headerlink" title="phpStudy的安装"></a>phpStudy的安装</h2><p>安装phpStudy，解压双击安装(<strong>非中文路径</strong>)，其它默认安装。</p>
+<p><strong>推荐就安装在默认的目录下，一定不能有中文，否则肯定启动不起来。</strong></p>
+<p><img src="image/install.png" alt=""></p>
+<h2 id="phpStudy的错误解决"><a href="#phpStudy的错误解决" class="headerlink" title="phpStudy的错误解决"></a>phpStudy的错误解决</h2><p>如果phpStudy启动发生错误，参数下列几点。</p>
+<h3 id="关闭iis服务器"><a href="#关闭iis服务器" class="headerlink" title="关闭iis服务器"></a>关闭iis服务器</h3><p>如果发现服务器启动不成功，很大原因是端口被占用了，因为windows默认会有一个iis服务器，只需要把iis服务器给禁用了即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//控制面板--&gt;程序--&gt;程序与功能--&gt;启用或关闭windows功能</span></div></pre></td></tr></table></figure>
+<p><img src="image/iis.png" alt=""></p>
+<h3 id="提示缺少vc9-库文件"><a href="#提示缺少vc9-库文件" class="headerlink" title="提示缺少vc9 库文件"></a>提示缺少vc9 库文件</h3><p>在提供的ajax资料库中找到<strong>phpStudy运行库</strong>， 根据自己电脑操作系统的位数安装对应的vc9运行库即可。</p>
+<p><img src="image/vc9.png" alt=""></p>
+<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><p>如果希望系统自己的服务器能够被别人访问。需要关闭防火墙。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//控制面板---&gt;系统和安全---&gt;Windows 防火墙---&gt;启动或者关闭windows防火墙</span></div></pre></td></tr></table></figure>
+<p><img src="image/fhq.png" alt=""></p>
+<h2 id="phpStudy的配置"><a href="#phpStudy的配置" class="headerlink" title="phpStudy的配置"></a>phpStudy的配置</h2><h3 id="修改网站目录与默认首页"><a href="#修改网站目录与默认首页" class="headerlink" title="修改网站目录与默认首页"></a>修改网站目录与默认首页</h3><p><img src="image/index.png" alt=""></p>
+<ul>
+<li>默认首页一般不用修改，业界规范就是index.html作为默认的首页。</li>
+<li>修改网站目录时，网站目录一定不能中文，不然apache启动会失败。</li>
+</ul>
+<h3 id="虚拟主机配置"><a href="#虚拟主机配置" class="headerlink" title="虚拟主机配置"></a>虚拟主机配置</h3><p>在一台web服务器上，我们可以通过配置虚拟主机，然后分别设定根目录，实现对多个网站的管理。</p>
+<p>具体步骤如下：</p>
+<p><strong>1.找到http.conf文件</strong></p>
+<p>找到470行，去掉<code>#</code>号注释</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Virtual hosts</div><div class="line">Include conf/extra/httpd-vhosts.conf</div></pre></td></tr></table></figure>
+<p><strong>2.找到<code>httpd-vhosts.conf</code>文件</strong></p>
+<p>在目录：D:\phpStudy\Apache\conf\extra下找到httpd-vhosts.conf文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"># 默认的虚拟主机</div><div class="line">&lt;VirtualHost _default_:<span class="number">80</span>&gt;</div><div class="line">  DocumentRoot <span class="string">"E:\cursor\13-SH11"</span></div><div class="line">  &lt;Directory <span class="string">"E:\cursor\13-SH11"</span>&gt;</div><div class="line">    Options +Indexes +FollowSymLinks +ExecCGI</div><div class="line">    AllowOverride All</div><div class="line">    Order allow,deny</div><div class="line">    Allow <span class="keyword">from</span> all</div><div class="line">    Require all granted</div><div class="line">  &lt;<span class="regexp">/Directory&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>VirtualHost&gt;</div><div class="line"></div><div class="line"># Add any other Virtual Hosts below</div><div class="line">&lt;VirtualHost *:<span class="number">80</span>&gt;</div><div class="line">    ServerAdmin webmaster@dummy-host.example.com</div><div class="line">    #根目录</div><div class="line">    DocumentRoot <span class="string">"D:\www\jdm"</span></div><div class="line">    #域名</div><div class="line">    ServerName jdm.com</div><div class="line">    #完整域名</div><div class="line">    ServerAlias www.jdm.com</div><div class="line">    ErrorLog <span class="string">"logs/dummy-host.example.com-error.log"</span></div><div class="line">    CustomLog <span class="string">"logs/dummy-host.example.com-access.log"</span> common</div><div class="line">&lt;<span class="regexp">/VirtualHost&gt;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">&lt;VirtualHost *:80&gt;</span></div><div class="line"><span class="regexp">    ServerAdmin webmaster@dummy-host.example.com</span></div><div class="line"><span class="regexp">    DocumentRoot "D:\www\wjs"</span></div><div class="line"><span class="regexp">    ServerName wjs.com</span></div><div class="line"><span class="regexp">    ServerAlias www.wjs.com</span></div><div class="line"><span class="regexp">    ErrorLog "logs/</span>dummy-host.example.com-error.log<span class="string">"</span></div><div class="line"><span class="string">    CustomLog "</span>logs/dummy-host.example.com-access.log<span class="string">" common</span></div><div class="line"><span class="string">&lt;/VirtualHost&gt;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">&lt;VirtualHost *:80&gt;</span></div><div class="line"><span class="string">    ServerAdmin webmaster@dummy-host.example.com</span></div><div class="line"><span class="string">    DocumentRoot "</span>D:\www\suning<span class="string">"</span></div><div class="line"><span class="string">    ServerName suning.com</span></div><div class="line"><span class="string">    ServerAlias www.suning.com</span></div><div class="line"><span class="string">    ErrorLog "</span>logs/dummy-host.example.com-error.log<span class="string">"</span></div><div class="line"><span class="string">    CustomLog "</span>logs/dummy-host.example.com-access.log<span class="string">" common</span></div><div class="line"><span class="string">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="PHP基础"><a href="#PHP基础" class="headerlink" title="PHP基础"></a>PHP基础</h1><blockquote>
+<p>文件以.php后缀结尾，所有程序包含在<code>&lt;?php 这里是代码 ?&gt;</code><br>避免使用中文目录和中文文件名 </p>
+<p>php页面无法直接打开需要运行在服务器环境当中</p>
+</blockquote>
+<p><strong><em>注意：学习php的目的是辅助学习ajax，因为我们需要了解一点后台的知识，千万不要本末倒置的跑去学习php语法。</em></strong> </p>
+<h2 id="php初体验"><a href="#php初体验" class="headerlink" title="php初体验"></a>php初体验</h2><blockquote>
+<p>webstorm对于php的支持并不友好，没有高亮显示，但是也支持代码提示，功能比较微弱，如果需要专业的提示和高亮，需要下载phpstorm。</p>
+</blockquote>
+<p><a href="http://www.jetbrains.com/phpstorm/" target="_blank" rel="external">phpstrorm下载地址</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  	<span class="comment">//echo 相当于document.write</span></div><div class="line">    <span class="keyword">echo</span> <span class="string">"hello world"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>输入中文乱码问题：如果使用echo输出中文，会乱码。</p>
+<p><strong><em>在php的语法中，末尾必须加分号，不然就报错了（最后一行可以不加分号）</em></strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    <span class="comment">//content-Type:text/html;返回内容是一个HTML文档，这样设置后，就能识别HTML标签了。</span></div><div class="line">    <span class="comment">//charset=utf-8 设置编码集</span></div><div class="line">    header(<span class="string">"content-Type:text/html;charset=utf-8"</span>);</div><div class="line">    <span class="keyword">echo</span> <span class="string">"hello world"</span>;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br/&gt;"</span>;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"大家好，我是胡聪聪"</span>;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//思考：浏览器访问html文件与访问php文件时，过程是怎么样的？</span></div></pre></td></tr></table></figure>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><blockquote>
+<p>php是一门弱类型语法，变量的类型可以随意改变。<br>变量其实就是存储数据的容器</p>
+</blockquote>
+<p><strong>变量的命名规则</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. 不需要关键字进行声明，变量在第一次赋值的时候被创建。</span></div><div class="line"><span class="comment">//2. 必须以$符号开始</span></div><div class="line"><span class="comment">//3. $后面的命名规则与js的变量命名规则一致。</span></div><div class="line">$name = <span class="string">"胡聪聪"</span>;</div><div class="line"><span class="keyword">echo</span> $name;</div></pre></td></tr></table></figure>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="简单数据类型"><a href="#简单数据类型" class="headerlink" title="简单数据类型"></a>简单数据类型</h3><p><strong>字符串</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$str = <span class="string">"胡聪聪"</span>;</div><div class="line"><span class="keyword">echo</span> $str;</div></pre></td></tr></table></figure>
+<p><strong>整数</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$num = <span class="number">100</span>;</div><div class="line"><span class="keyword">echo</span> $num;</div></pre></td></tr></table></figure>
+<p><strong>浮点型</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$float = <span class="number">11.11</span>;</div><div class="line"><span class="keyword">echo</span> $float;</div></pre></td></tr></table></figure>
+<p><strong>布尔类型</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$flag = <span class="keyword">true</span>;</div><div class="line"><span class="comment">//当布尔类型值为true时，输出1</span></div><div class="line"><span class="keyword">echo</span> $flag;</div><div class="line">$flag = <span class="keyword">false</span>;</div><div class="line"><span class="comment">//当布尔类型为false时，输出空字符串</span></div><div class="line"><span class="keyword">echo</span> $flag;</div></pre></td></tr></table></figure>
+<p><strong>php的拼串</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. 在php中，+号只有算数的功能，并不能拼串</span></div><div class="line"><span class="comment">//2. 在php中，拼串使用.</span></div><div class="line">$name = <span class="string">"胡聪聪"</span>;</div><div class="line"><span class="keyword">echo</span> <span class="string">"大家好，我是"</span> . $name . <span class="string">"，今年18岁"</span>;</div></pre></td></tr></table></figure>
+<p><strong>php中的单引号与双引号</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. 字符串的定义可以使用单引号，也可以使用双引号</span></div><div class="line">$name = <span class="string">"胡聪聪"</span>;</div><div class="line">$desc = <span class="string">'很帅'</span>;</div><div class="line"><span class="comment">//2. 在单引号中，完全当做字符看待</span></div><div class="line"><span class="comment">//3. 在双引号中，能够识别变量。如果有变量格式的字符串，可以直接解析</span></div><div class="line"></div><div class="line">$name = <span class="string">"胡聪聪"</span>;<span class="comment">//胡聪聪</span></div><div class="line"><span class="keyword">echo</span> $name;</div><div class="line">$desc = <span class="string">'很帅'</span>;</div><div class="line"><span class="keyword">echo</span> $desc;<span class="comment">//很帅</span></div><div class="line"></div><div class="line">$str = <span class="string">'$name 很帅'</span>;<span class="comment">//$name 很帅</span></div><div class="line"><span class="keyword">echo</span> $str;</div><div class="line"></div><div class="line">$str = <span class="string">"$name 很帅"</span>;<span class="comment">//胡聪聪 很帅</span></div><div class="line"><span class="keyword">echo</span> $str;</div></pre></td></tr></table></figure>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><blockquote>
+<p>在php中，数组分为两种，索引数组和关联数组</p>
+</blockquote>
+<p><strong>索引数组（类似与JS中的数组）</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$arr = <span class="keyword">array</span>(<span class="string">"张飞"</span>,<span class="string">"赵云"</span>,<span class="string">"马超"</span>);</div><div class="line"><span class="keyword">echo</span> $arr;<span class="comment">//echo只能打印基本数据类型</span></div><div class="line"><span class="keyword">echo</span> $arr[<span class="number">0</span>];<span class="comment">//张飞</span></div></pre></td></tr></table></figure>
+<p><strong>关联数组（类似与JS中的对象）</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//属性名必须用引号引起来</span></div><div class="line">$arr = <span class="keyword">array</span>(<span class="string">"name"</span>=&gt;<span class="string">"zhangsan"</span>, <span class="string">"age"</span>=&gt;<span class="number">18</span>);</div><div class="line"><span class="keyword">echo</span> $arr[<span class="string">"name"</span>];</div></pre></td></tr></table></figure>
+<p><strong>输出语句</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. echo 输出简单数据类型</span></div><div class="line"><span class="comment">//2. print_r 输出数据结构，一般用于输出复杂类型。</span></div><div class="line">print_r($arr);<span class="comment">//print_r是一个函数，不要忘记小括号</span></div><div class="line"><span class="comment">//3. var_dump 输出完整的数据结构，包括类型，一般用于精准调试</span></div><div class="line">var_dump($arr);</div></pre></td></tr></table></figure>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><blockquote>
+<p>在php以及其他高级语言中，都有类的概念，表示一类对象，跟js中构造函数类似。</p>
+</blockquote>
+<p><strong>对象我们学习过程中用不到，了解即可。无序深究</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义一个类（类似js的构造函数）</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">  <span class="keyword">public</span> $name = <span class="string">"小明"</span>;</div><div class="line">  <span class="keyword">public</span> $age = <span class="number">12</span>;</div><div class="line">  <span class="keyword">private</span> $sex = <span class="string">"男"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$zs = <span class="keyword">new</span> Person;</div><div class="line">print_r($zs);<span class="comment">//打印对象的结构信息</span></div><div class="line"><span class="keyword">echo</span> $zs-&gt;name;<span class="comment">//对象中取值用 -&gt;</span></div><div class="line"><span class="keyword">echo</span> $zs-&gt;age;</div><div class="line"><span class="keyword">echo</span> $zs-&gt;sex;<span class="comment">//私有属性，无法获取</span></div></pre></td></tr></table></figure>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">    header(<span class="string">"content-Type:text/html;charset=utf-8"</span>);</div><div class="line">    <span class="comment">//php中函数的语法与js中函数的语法基本一样，不同点在于</span></div><div class="line">    <span class="comment">//1. 函数名大小写不敏感</span></div><div class="line">    <span class="comment">//2. 函数的参数可以设置默认值</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span> <span class="params">($name=<span class="string">"周杰伦"</span>)</span> </span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"大家好，我是$name"</span>;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</div><div class="line">    &#125;</div><div class="line">    sayHello();<span class="comment">//不传参数，会使用默认值</span></div><div class="line">    sayHello(<span class="string">"胡聪聪"</span>);<span class="comment">//传参数，默认值不生效，和less差不多。</span></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h3 id="判断语句"><a href="#判断语句" class="headerlink" title="判断语句"></a>判断语句</h3><p>基本上来说，所有语言的if..else语法都是一样</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$age = <span class="number">17</span>;</div><div class="line"><span class="keyword">if</span> ($age &gt;= <span class="number">18</span>) &#123;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"终于可以看电影了,嘿嘿嘿"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"哎，还是回家学习把"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p><strong>遍历索引数组</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$arr = <span class="keyword">array</span>(<span class="string">"张三"</span>, <span class="string">"李四"</span>, <span class="string">"王五"</span>, <span class="string">"赵六"</span>, <span class="string">"田七"</span>, <span class="string">"王八"</span>);</div><div class="line"><span class="comment">//获取数组的长度： count($arr)</span></div><div class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; count($arr); $i++) &#123;</div><div class="line">  <span class="keyword">echo</span> $arr[$i];</div><div class="line">  <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>遍历关联数组</strong> </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//遍历关联数组</span></div><div class="line">$arr = <span class="keyword">array</span>(</div><div class="line">  <span class="string">"name"</span>=&gt;<span class="string">"zs"</span>,</div><div class="line">  <span class="string">"age"</span>=&gt;<span class="number">18</span>,</div><div class="line">  <span class="string">"sex"</span>=&gt;<span class="number">20</span></div><div class="line">);</div><div class="line"><span class="keyword">foreach</span>($arr <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">  <span class="keyword">echo</span> $key . <span class="string">"="</span> . $value . <span class="string">"&lt;br&gt;"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="表单处理"><a href="#表单处理" class="headerlink" title="表单处理"></a>表单处理</h2><blockquote>
+<p>表单（form）：表单用于收集用户输入信息，并将数据提交给服务器。是一种常见的与服务端数据交互的一种方式</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. action：指定表单的提交地址</span></div><div class="line"><span class="comment">//2. method:指定表单的提交方式，get/post，默认get</span></div><div class="line"><span class="comment">//3. input的数据想要提交到后台，必须指定name属性，后台通过name属性获取值</span></div><div class="line"><span class="comment">//4. 想要提交表单，不能使用input:button 必须使用input:submit</span></div></pre></td></tr></table></figure>
+<p><strong>php获取表单数据</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//$_GET是系统提供的一个变量，是一个数组，里面存放了表单通过get方式提交的数据。</div><div class="line">//$_POST是系统提供的一个变量，是一个数组，里面存放了表单通过post方式提交的数据。</div></pre></td></tr></table></figure>
+<p><strong>get与post的区别</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. get方式</span></div><div class="line">	<span class="comment">//1.1 数据会拼接在url地址的后面?username=hcc&amp;password=123456</span></div><div class="line">	<span class="comment">//1.2 地址栏有长度限制，因此get方式提交数据大小不会超过4k</span></div><div class="line"><span class="comment">//2. post方式</span></div><div class="line">	<span class="comment">//2.1 数据不会在url中显示，相比get方式，post更安全</span></div><div class="line">	<span class="comment">//2.2 提交的数据没有大小限制</span></div><div class="line"></div><div class="line"><span class="comment">//根据HTTP规范，GET用于信息获取，POST表示可能修改变服务器上的资源的请求</span></div></pre></td></tr></table></figure>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p><strong>html要求</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 文件上传的提交方式必须是post方式</div><div class="line"><span class="number">2.</span> 需要给form指定enctype=<span class="string">"multipart/form-data"</span></div><div class="line"><span class="number">3.</span> 指定name属性，后台才能获取到</div></pre></td></tr></table></figure>
+<p><strong>php相关</strong></p>
+<ul>
+<li>文件上传时，<code>$_GET</code>与<code>$_POST</code>都无法获取到文件信息，通过<code>$_FILES</code>才能获取到，这是一个数组。</li>
+<li>上传文件时，文件会临时保存在服务器上，如果文件最终没有保存，那么临时文件会被删除，保证服务器安全。</li>
+<li><code>sleep(10)</code>可以让代码延迟10秒钟才执行。</li>
+<li><code>move_uploaded_file($path, $newPath);</code>可以保存临时图片</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$path = $_FILES[<span class="string">'upload'</span>][<span class="string">'tmp_name'</span>];</div><div class="line">$newPath = <span class="string">"./uploads/test.png"</span>;</div><div class="line"><span class="comment">//第一个参数：临时文件的路径</span></div><div class="line"><span class="comment">//第二个参数：保存的文件路径</span></div><div class="line">move_uploaded_file($path, $newPath);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;img src='./uploads/test.png'&gt;"</span>;</div></pre></td></tr></table></figure>
+<h2 id="PHP常用函数"><a href="#PHP常用函数" class="headerlink" title="PHP常用函数"></a>PHP常用函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取数组的长度</span></div><div class="line">echo count($arr);</div><div class="line"><span class="comment">//判断数组是否包含某个key</span></div><div class="line">echo array_key_exists(<span class="string">"name"</span>, $arr);</div><div class="line"><span class="comment">//判断数组是否包含某个值</span></div><div class="line">echo in_array(<span class="string">"zs"</span>, $arr);</div></pre></td></tr></table></figure>
+<h2 id="动态页面"><a href="#动态页面" class="headerlink" title="动态页面"></a>动态页面</h2><blockquote>
+<p>静态页面：页面的内容和结构都是写死，不会变化的，是是实实在在存在与服务器上的一个html页面。</p>
+<p>动态页面：页面的内容会根据数据库中的数据变化，存在与服务器端的是一个php或者jsp页面，用户访问时，会实时的进行改变。</p>
+</blockquote>
+<h3 id="使用php动态渲染页面"><a href="#使用php动态渲染页面" class="headerlink" title="使用php动态渲染页面"></a>使用php动态渲染页面</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">  <span class="comment">//这个属性是可以通过数据库进行获取的</span></div><div class="line">  $person = <span class="keyword">array</span>(</div><div class="line">    <span class="string">"name"</span>=&gt;<span class="string">"胡聪聪"</span>,</div><div class="line">    <span class="string">"gender"</span>=&gt;<span class="string">"男1"</span>,</div><div class="line">    <span class="string">"hobby"</span>=&gt;<span class="string">"女1"</span></div><div class="line">  )</div><div class="line"><span class="meta">?&gt;</span></div><div class="line">&lt;p&gt;姓名：&lt;span&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $person[<span class="string">'name'</span>];  <span class="meta">?&gt;</span>&lt;/span&gt;&lt;/p&gt;</div><div class="line">&lt;p&gt;性别：&lt;span&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $person[<span class="string">'gender'</span>]; <span class="meta">?&gt;</span>&lt;/span&gt;&lt;/p&gt;</div><div class="line">&lt;p&gt;爱好：&lt;span&gt;<span class="meta">&lt;?php</span> <span class="keyword">echo</span> $person[<span class="string">'hobby'</span>] <span class="meta">?&gt;</span>&lt;/span&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
+<p>以前很长一段时间的开发模式就是这样的，前端工程师先把html页面写好，后端程序员把html页面后缀改成php页面，然后将数据渲染出来。</p>
+<h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><blockquote>
+<p>include （或 require）语句会获取指定文件中存在的所有文本/代码/标记，并复制到使用 include 语句的文件中。包含文件很有用，如果您需要在网站的多张页面上引用相同的 PHP、HTML 或文本的话。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$arr = <span class="keyword">array</span>(<span class="string">'张三'</span>,<span class="string">'李四'</span>,<span class="string">'王五'</span>,<span class="string">'赵六'</span>);</div><div class="line"><span class="keyword">include</span> <span class="string">'04-render-for.html'</span>;</div></pre></td></tr></table></figure>
+<p>【案例：京东分类页】</p>
+<p>【案例：京东首页】</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们使用php动态渲染页面时，有很多比较麻烦的地方。</p>
+<ul>
+<li>在前端写好页面以后，需要后台进行修改，意味这后端程序员也需要懂前端的知识，其实渲染的工作应该交给前端来做。</li>
+<li>前端没有写好页面的话，后端无法开始工作，需要等待前端的页面完成之后才能开始工作，拖延项目的进度。</li>
+<li>这种渲染，属于同步渲染，页面加载速度比较慢，会影响后面的内容能够的渲染速度。</li>
+</ul>
+<p>【演示：同步渲染】</p>
+<h1 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h1><blockquote>
+<p>协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则<br>HTTP协议，即超文本传输协议(Hypertext transfer protocol)。是一种详细规定了浏览器和服务器之间互相通信的规则，HTTP协议分为<strong>请求</strong> 和<strong>响应</strong> 两个部分组成。</p>
+</blockquote>
+<h2 id="请求与请求报文"><a href="#请求与请求报文" class="headerlink" title="请求与请求报文"></a>请求与请求报文</h2><p><strong>get请求的请求报文详解</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//--------------------------请求行--------------------------------</span></div><div class="line"><span class="comment">// GET  请求方式</span></div><div class="line"><span class="comment">// /day02/01.php?username=hucc&amp;password=123456    请求路径+参数（注意点）</span></div><div class="line"><span class="comment">// HTTP/1.1 HTTP的版本号</span></div><div class="line">GET /day02/<span class="number">01.</span>php?username=hucc&amp;password=<span class="number">123456</span> HTTP/<span class="number">1.1</span></div><div class="line"></div><div class="line"><span class="comment">//--------------------------请求头--------------------------------</span></div><div class="line"><span class="comment">// Host:主机地址</span></div><div class="line">Host: www.study.com</div><div class="line"><span class="comment">// HTTP1.1版本默认开启，建立过连接后，TCP连接不会断开，下次连接可以继续使用（底层，不用管）</span></div><div class="line">Connection: keep-alive</div><div class="line"><span class="comment">//chrome浏览器自己增加的，不用管</span></div><div class="line">Upgrade-Insecure-Requests: <span class="number">1</span></div><div class="line"><span class="comment">//浏览器的代理字符串（版本信息）</span></div><div class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; WOW64) AppleWebKit/<span class="number">537.36</span> (KHTML, like Gecko) Chrome/<span class="number">58.0</span><span class="number">.3029</span><span class="number">.96</span> Safari/<span class="number">537.36</span></div><div class="line"><span class="comment">//浏览器端可以接受的类型。</span></div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/webp,<span class="string">`*/*`</span>;q=<span class="number">0.8</span></div><div class="line"><span class="comment">//从哪个页面发出的请求</span></div><div class="line">Referer: http:<span class="comment">//www.study.com/day02/01-login.html</span></div><div class="line"><span class="comment">//检查浏览器支持的压缩方式</span></div><div class="line">Accept-Encoding: gzip, deflate, sdch</div><div class="line"><span class="comment">//浏览器支持的语言，优先中文。</span></div><div class="line">Accept-Language: zh-CN,zh;q=<span class="number">0.8</span>,en;q=<span class="number">0.6</span></div><div class="line"></div><div class="line"><span class="comment">//----------------------------请求体-------------------------------------</span></div><div class="line"><span class="comment">//get请求没有请求体，但是参数会拼接到请求行中</span></div></pre></td></tr></table></figure>
+<p><strong>POST请求的请求报文</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//-----------------------请求行---------------------------------------------</span></div><div class="line">POST /day02/<span class="number">01.</span>php HTTP/<span class="number">1.1</span></div><div class="line"></div><div class="line"><span class="comment">//-----------------------请求头--------------------------------------------</span></div><div class="line">Host: www.study.com</div><div class="line">Connection: keep-alive</div><div class="line"><span class="comment">//传递的参数的长度。</span></div><div class="line">Content-Length: <span class="number">29</span></div><div class="line">Cache-Control: max-age=<span class="number">0</span></div><div class="line">Origin: http:<span class="comment">//www.study.com</span></div><div class="line">Upgrade-Insecure-Requests: <span class="number">1</span></div><div class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; WOW64) AppleWebKit/<span class="number">537.36</span> (KHTML, like Gecko) Chrome/<span class="number">58.0</span><span class="number">.3029</span><span class="number">.96</span> Safari/<span class="number">537.36</span></div><div class="line"><span class="comment">//内容类型：表单数据，如果是post请求，必须指定这个属性。</span></div><div class="line">Content-Type: application/x-www-form-urlencoded</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/webp,<span class="string">`*/*`</span>;q=<span class="number">0.8</span></div><div class="line">Referer: http:<span class="comment">//www.study.com/day02/01-login.html</span></div><div class="line">Accept-Encoding: gzip, deflate</div><div class="line">Accept-Language: zh-CN,zh;q=<span class="number">0.8</span>,en;q=<span class="number">0.6</span></div><div class="line"></div><div class="line"><span class="comment">//------------------------请求体------------------------------------------</span></div><div class="line">username=hucc&amp;password=<span class="number">123456</span></div></pre></td></tr></table></figure>
+<p><strong>GET请求与POST请求的对比</strong> </p>
+<ul>
+<li>GET请求没有请求体，因为GET请求的参数拼接到地址栏中了</li>
+<li>POST请求有请求体，就是传递的参数</li>
+<li>POST请求需要指定content-type属性。</li>
+</ul>
+<h2 id="响应与响应报文"><a href="#响应与响应报文" class="headerlink" title="响应与响应报文"></a>响应与响应报文</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//---------------------状态行（响应行）-------------------------------</span></div><div class="line"><span class="comment">//HTTP/1.1  HTTP版本</span></div><div class="line"><span class="comment">//200 响应的状态</span></div><div class="line">	<span class="comment">//200表示成功</span></div><div class="line">	<span class="comment">//304表示读缓存</span></div><div class="line">	<span class="comment">//404表示找不到资源</span></div><div class="line">	<span class="comment">//500表示服务端错误</span></div><div class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</div><div class="line"></div><div class="line"><span class="comment">//----------------------响应头-----------------------------------------------</span></div><div class="line"><span class="built_in">Date</span>: Thu, <span class="number">22</span> Jun <span class="number">2017</span> <span class="number">16</span>:<span class="number">51</span>:<span class="number">22</span> GMT</div><div class="line">Server: Apache/<span class="number">2.4</span><span class="number">.23</span> (Win32) OpenSSL/<span class="number">1.0</span><span class="number">.2</span>j PHP/<span class="number">5.4</span><span class="number">.45</span></div><div class="line">X-Powered-By: PHP/<span class="number">5.4</span><span class="number">.45</span></div><div class="line">Content-Length: <span class="number">18</span></div><div class="line">Keep-Alive: timeout=<span class="number">5</span>, max=<span class="number">100</span></div><div class="line">Connection: Keep-Alive</div><div class="line"><span class="comment">//内容类型，告诉浏览器该如何解析响应结果</span></div><div class="line">Content-Type: text/html;charset=utf<span class="number">-8</span></div><div class="line"><span class="comment">//-----------------------响应体------------------------------------------------</span></div><div class="line">用户登录成功</div></pre></td></tr></table></figure>
+<p>通常来说，我们不会用抓包工具来查看请求和响应，太麻烦了，可以直接使用谷歌浏览器来查看请求报文和响应报文。</p>
+<p>谷歌浏览器会对报文进行一定的格式化，看起来虽然不是原生的报文，但是使用起来更加的方便简洁。</p>
+<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><blockquote>
+<p>即 Asynchronous [e’sɪŋkrənəs] Javascript And XML， AJAX 不是一门的新的语言，而是对现有技术的综合利用。 本质是在HTTP协议的基础上以异步的方式与服务器进行通信。</p>
+</blockquote>
+<h2 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h2><p>同步和异步概念：</p>
+<p>同步: 指的就是事情要一件一件做。等做完前一件才能做后一件任务</p>
+<p>异步: 不受当前任务的影响，两件事情同时进行，做一件事情时，不影响另一件事情的进行。</p>
+<p>编程中：异步程序代码执行时不会阻塞其它程序代码执行,从而提升整体执行效率。</p>
+<p><img src="image/async_time.png" alt=""></p>
+<p>网页异步应用：</p>
+<ol>
+<li>验证你的用户名是否已经存在（一边输入，一边获取你的信息，和后台比对）。</li>
+<li>百度搜索提示，及相关内容展示（一边输入，一边找出了你可能要的内容）。</li>
+<li>新浪微博评论（异步加载）。</li>
+</ol>
+<p>XMLHttpRequest可以以异步方式的处理程序。</p>
+<h2 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h2><blockquote>
+<p>浏览器内建对象，用于在后台与服务器通信(交换数据) ， 由此我们便可实现对网页的部分更新，而不是刷新整个页面。这个请求是异步，即在往服务器发送请求时，并不会阻碍程序的运行，浏览器会继续渲染后续的结构。</p>
+</blockquote>
+<h3 id="发送get请求"><a href="#发送get请求" class="headerlink" title="发送get请求"></a>发送get请求</h3><p>XMLHttpRequest以异步的方式发送HTTP请求，因此在发送请求时，一样需要遵循HTTP协议。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用XMLHttpRequest发送get请求的步骤</span></div><div class="line"><span class="comment">//1. 创建一个XMLHttpRequest对象</span></div><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest;<span class="comment">//构造函数没有参数的情况,括号可以省略</span></div><div class="line"><span class="comment">//2. 设置请求行</span></div><div class="line"><span class="comment">//第一个参数:请求方式  get/post</span></div><div class="line"><span class="comment">//第二个参数:请求的地址 需要在url后面拼上参数列表</span></div><div class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"08.php?name=hucc"</span>);</div><div class="line"><span class="comment">//3. 设置请求头</span></div><div class="line"><span class="comment">//浏览器会给我们默认添加基本的请求头,get请求时无需设置</span></div><div class="line"><span class="comment">//4. 设置请求体</span></div><div class="line"><span class="comment">//get请求的请求体为空,因为参数列表拼接到url后面了</span></div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>get请求,设置请求行时,需要把参数列表拼接到url后面</li>
+<li>get请求不用设置请求头</li>
+<li>get请求的请求体为null</li>
+</ul>
+<h3 id="发送post请求"><a href="#发送post请求" class="headerlink" title="发送post请求"></a>发送post请求</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest;</div><div class="line"><span class="comment">//1. 设置请求行 post请求的参数列表在请求体中</span></div><div class="line">xhr.open(<span class="string">"post"</span>, <span class="string">"09.php"</span>);</div><div class="line"><span class="comment">//2. 设置请求头, post请求必须设置content-type,不然后端无法获取到数据</span></div><div class="line">xhr.setRequestHeader(<span class="string">"content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line"><span class="comment">//3. 设置请求体</span></div><div class="line">xhr.send(<span class="string">"name=hucc&amp;age=18"</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li><p>post请求,设置请求行时,参数列表不能拼接到url后面</p>
+</li>
+<li><p>post必须设置请求头中的content-type为application/x-www-form-urlencoded</p>
+</li>
+<li><p>post请求需要将参数列表设置到请求体中.</p>
+</li>
+</ul>
+<h3 id="获取响应"><a href="#获取响应" class="headerlink" title="获取响应"></a>获取响应</h3><p>HTTP响应分为3个部分，状态行、响应头、响应体。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//给xhr注册一个onreadystatechange事件，当xhr的状态发生状态发生改变时，会触发这个事件。</span></div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>)&#123;</div><div class="line">    <span class="comment">//1. 获取状态行</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"状态行:"</span>+xhr.status);</div><div class="line">    <span class="comment">//2. 获取响应头</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"所有的相应头:"</span>+xhr.getAllResponseHeaders());</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"指定相应头:"</span>+xhr.getResponseHeader(<span class="string">"content-type"</span>));</div><div class="line">    <span class="comment">//3. 获取响应体</span></div><div class="line">    <span class="built_in">console</span>.log(xhr.responseText);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>readyState</strong> </p>
+<blockquote>
+<p>readyState:记录了XMLHttpRequest对象的当前状态</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//0：请求未初始化（还没有调用 open()）。</span></div><div class="line"><span class="comment">//1：请求已经建立，但是还没有发送（还没有调用 send()）。</span></div><div class="line"><span class="comment">//2：请求已发送，正在处理中</span></div><div class="line"><span class="comment">//3：请求在处理中；通常响应中已有部分数据可用了，但是服务器还没有完成响应的生成。</span></div><div class="line"><span class="comment">//4：响应已完成；您可以获取并使用服务器的响应了。(我们只需要关注状态4即可)</span></div></pre></td></tr></table></figure>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>【判断用户名是否存在】</p>
+<p>【用户登录案例】</p>
+<p>【聊天机器人案例】</p>
+<h2 id="数据交互"><a href="#数据交互" class="headerlink" title="数据交互"></a>数据交互</h2><blockquote>
+<p>浏览器端只是负责用户的交互和数据的收集以及展示，真正的数据都是存储在服务器端的。我们现在通过ajax的确可以返回一些简单的数据（一个字符串），但是在实际开发过程中，肯定会会设计到大量的复杂类型的数据传输，比如数组、对象等，但是每个编程语言的语法都不一样。因此我们会采用通过的数据交换格式（XML、JSON）来进行数据的交互。</p>
+</blockquote>
+<h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><p><strong>什么是XML</strong></p>
+<ul>
+<li>XML 指可扩展标记语言（EXtensible Markup Language）</li>
+<li>XML 是一种标记语言，很类似 HTML</li>
+<li>XML 的设计宗旨是传输数据，而非显示数据</li>
+<li>XML 标签没有被预定义。您需要自行定义标签。</li>
+</ul>
+<p><strong>语法规范</strong></p>
+<ul>
+<li>第一行必须是版本信息</li>
+<li>必须有一个根元素（有且仅有一个）</li>
+<li>标签不可有空格、不可以数字或.开头、大小写敏感</li>
+<li>不可交叉嵌套，都是双标签，如果是单标签，必须闭合</li>
+<li>属性双引号（浏览器自动修正成双引号了）</li>
+<li>特殊符号要使用实体</li>
+<li>注释和HTML一样</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">students</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">student</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>张三<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>18<span class="tag">&lt;/<span class="name">age</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">gender</span>&gt;</span>男<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">desc</span>&gt;</span>路人甲<span class="tag">&lt;/<span class="name">desc</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">student</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>李四<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>20<span class="tag">&lt;/<span class="name">age</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">gender</span>&gt;</span>男<span class="tag">&lt;/<span class="name">gender</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">desc</span>&gt;</span>路人乙<span class="tag">&lt;/<span class="name">desc</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">students</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>php获取xml文件的内容</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//注意，如果需要返回xml数据，需要把content-type改成text/xml,不然浏览器以text/html进行解析。</span></div><div class="line">header(<span class="string">'content-type:text/xml;charset=utf-8'</span>);</div><div class="line"><span class="comment">//用于获取文件的内容</span></div><div class="line"><span class="comment">//参数：文件的路径</span></div><div class="line">$result = file_get_contents(<span class="string">"data.xml"</span>);</div><div class="line"><span class="keyword">echo</span> $result;</div></pre></td></tr></table></figure>
+<p><strong>html解析xml</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取服务端返回的xml数据，需要使用xhr.responseXML，这是一个document对象，可以使用DOM中的方法查找元素。</span></div><div class="line"><span class="keyword">var</span> data = xhr.responseXML;</div><div class="line"><span class="comment">//获取所有的学生</span></div><div class="line"><span class="keyword">var</span> students = data.querySelectorAll(<span class="string">"student"</span>);</div></pre></td></tr></table></figure>
+<p>缺点：虽然可以描述和传输复杂数据，但是其解析过于复杂并且体积较大，所以实现开发已经很少使用了。</p>
+<h3 id="JSON数据"><a href="#JSON数据" class="headerlink" title="JSON数据"></a>JSON数据</h3><p>JSON(JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于 ECMAScript 规范的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。</p>
+<ul>
+<li>数据在名称/值对中</li>
+<li>数据由逗号分隔(最后一个健/值对不能带逗号)</li>
+<li>花括号保存对象，方括号保存数组</li>
+<li>键使用双引号</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">a</span>: <span class="string">'Hello'</span>, <span class="attr">b</span>: <span class="string">'World'</span>&#125;; <span class="comment">//这是一个对象，注意键名也是可以使用引号包裹的</span></div><div class="line"><span class="keyword">var</span> json = <span class="string">'&#123;"a": "Hello", "b": "World"&#125;'</span>; <span class="comment">//这是一个 JSON 字符串，本质是一个字符串</span></div></pre></td></tr></table></figure>
+<p><strong>JSON数据在不同语言进行传输时，类型为字符串，不同的语言各自也都对应有解析方法，需要解析完成后才能读取</strong></p>
+<h4 id="php处理json"><a href="#php处理json" class="headerlink" title="php处理json"></a>php处理json</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<ul>
+<li>php关联数组==&gt; json</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// php的关联数组</span></div><div class="line">$obj = <span class="keyword">array</span>(</div><div class="line">  <span class="string">"a"</span>=&gt;<span class="string">"hello"</span>,</div><div class="line">  <span class="string">"b"</span>=&gt;<span class="string">"world"</span>,</div><div class="line">  <span class="string">"name"</span>=&gt;<span class="string">"胡聪聪"</span></div><div class="line">);</div><div class="line"><span class="comment">//json字符串</span></div><div class="line">$json = json_encode($obj);</div><div class="line"><span class="keyword">echo</span> $json;</div></pre></td></tr></table></figure>
+<ul>
+<li>json===&gt;php对象</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$json = <span class="string">'&#123;"a": "Hello", "b": "World"&#125;'</span>;<span class="comment">//json字符串</span></div><div class="line"><span class="comment">//第一个参数：json字符串</span></div><div class="line"><span class="comment">//第二个参数：</span></div><div class="line">	<span class="comment">//false，将json转换成对象(默认)</span></div><div class="line">	<span class="comment">//true：将对象转换成数组(推荐)</span></div><div class="line">$obj = json_decode($json,<span class="keyword">true</span>);</div><div class="line"><span class="keyword">echo</span> $obj[<span class="string">'a'</span>];</div><div class="line"></div><div class="line"><span class="comment">//通过json文件获取到的内容就是一个json字符串。</span></div><div class="line">$data = file_get_contents(<span class="string">"data.json"</span>);</div><div class="line"><span class="comment">//将json转换成数组</span></div><div class="line">$result = json_decode($data, <span class="keyword">true</span>);</div><div class="line">print_r($result);</div></pre></td></tr></table></figure>
+<h4 id="JS处理json"><a href="#JS处理json" class="headerlink" title="JS处理json"></a>JS处理json</h4><ul>
+<li><p>JS对象 ==&gt; JSON字符串 JSON.stringify(obj)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//obj是一个js对象</span></div><div class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">a</span>: <span class="string">'Hello'</span>, <span class="attr">b</span>: <span class="string">'World'</span>&#125;</div><div class="line"><span class="comment">//result就变成了一个json字符串了</span></div><div class="line"><span class="keyword">var</span> result = <span class="built_in">JSON</span>.stringify(obj);<span class="comment">// '&#123;"a": "Hello", "b": "World"&#125;'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>JSON字符串 ==&gt; JS对象  JSON.parse(obj)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//json是一个json字符串</span></div><div class="line"><span class="keyword">var</span> json = <span class="string">'&#123;"a": "Hello", "b": "World"&#125;'</span>;</div><div class="line"><span class="comment">//obj就变成了一个js对象</span></div><div class="line"><span class="keyword">var</span> obj = <span class="built_in">JSON</span>.parse(json);<span class="comment">// &#123;a: 'Hello', b: 'World'&#125;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用json进行数据传输</p>
+<p>思考：</p>
+<ol>
+<li>js有一个对象，如何发送到php后台</li>
+<li>php中有一个对象，如何发送到前台。</li>
+</ol>
+<p>【案例：获取表格数据.html】</p>
+<h3 id="eval方法"><a href="#eval方法" class="headerlink" title="eval方法"></a>eval方法</h3><p>eval() 函数可计算某个字符串，并执行其中的的 JavaScript 代码。eval的参数是一个字符串，这个字符串是需要执行的表达式或者语句。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="built_in">eval</span>(<span class="string">"&#123;&#125;"</span>));<span class="comment">//undefined，因为&#123;&#125;备当成了代码块</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">eval</span>(<span class="string">"(&#123;&#125;)"</span>));<span class="comment">//obj，因为&#123;&#125;用()引起来了。</span></div><div class="line"></div><div class="line"><span class="comment">//使用这个方法，也可以将一个json字符串转换成js对象。</span></div><div class="line"><span class="keyword">var</span> json = <span class="string">'&#123;"name":"zs", "age":18, "sex":"男"&#125;'</span>;</div><div class="line"><span class="keyword">var</span> obj = <span class="built_in">eval</span>(<span class="string">"("</span> + json + <span class="string">")"</span>);</div><div class="line"><span class="built_in">console</span>.log(obj);</div></pre></td></tr></table></figure>
+<p>注意：eval函数的功能非常的强大，但是实际使用的情况并不多。</p>
+<ul>
+<li>eval形式的代码难以阅读</li>
+<li>eval形式的代码无法打断点，因为本质还是还是一个字符串</li>
+<li>在浏览器端执行任意的 JavaScript会带来潜在的安全风险，恶意的JavaScript代码可能会破坏应用</li>
+</ul>
+<h2 id="兼容性处理"><a href="#兼容性处理" class="headerlink" title="兼容性处理"></a>兼容性处理</h2><h2 id="封装ajax工具函数"><a href="#封装ajax工具函数" class="headerlink" title="封装ajax工具函数"></a>封装ajax工具函数</h2><blockquote>
+<p>每次发送ajax请求，其实步骤都是一样的，重复了大量代码，我们完全可以封装成一个工具函数。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1. 创建xhr对象</span></div><div class="line"><span class="comment">//2. 设置请求行</span></div><div class="line"><span class="comment">//3. 设置请求头</span></div><div class="line"><span class="comment">//3. 设置请求体</span></div><div class="line"><span class="comment">//4. 监听响应状态</span></div><div class="line"><span class="comment">//5. 获取响应内容</span></div></pre></td></tr></table></figure>
+<h3 id="参数提取"><a href="#参数提取" class="headerlink" title="参数提取"></a>参数提取</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>参数类型</th>
+<th>描述</th>
+<th>传值</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>请求方式</td>
+<td>get/post</td>
+<td>get</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>请求地址</td>
+<td>接口地址</td>
+<td>当前页地址</td>
+</tr>
+<tr>
+<td>async</td>
+<td>boolean</td>
+<td>是否异步</td>
+<td>true/fase</td>
+<td>true</td>
+</tr>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>请求数据</td>
+<td><code>{key:value,key:value}</code></td>
+<td></td>
+</tr>
+<tr>
+<td>success</td>
+<td>function</td>
+<td>响应成功时调用</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>error</td>
+<td>function</td>
+<td>响应失败时调用</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参数检测"><a href="#参数检测" class="headerlink" title="参数检测"></a>参数检测</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//如果options参数没有传递，直接返回。</span></div><div class="line"><span class="keyword">if</span> (!options || <span class="keyword">typeof</span> options !== <span class="string">"object"</span>) &#123;</div><div class="line">  <span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//处理默认参数</span></div><div class="line"><span class="comment">//如果参数不是post，那就默认为get</span></div><div class="line"><span class="keyword">var</span> type = options.type == <span class="string">"post"</span> ? <span class="string">"post"</span> : <span class="string">"get"</span>;</div><div class="line"><span class="comment">//如果没有传url，那就传当前地址</span></div><div class="line"><span class="keyword">var</span> url = options.url || location.href;</div><div class="line"><span class="comment">//如果参数不是false，那就默认是true，发异步请求</span></div><div class="line"><span class="keyword">var</span> <span class="keyword">async</span> = options.async == <span class="literal">false</span> ? <span class="literal">false</span> : <span class="literal">true</span>;</div></pre></td></tr></table></figure>
+<h3 id="完整版"><a href="#完整版" class="headerlink" title="完整版"></a>完整版</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $ = &#123;</div><div class="line">  ajax: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</div><div class="line">    <span class="comment">//如果options参数没有传递，直接返回。</span></div><div class="line">    <span class="keyword">if</span> (!options || <span class="keyword">typeof</span> options !== <span class="string">"object"</span>) &#123;</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//处理默认参数</span></div><div class="line">    <span class="comment">//如果参数不是post，那就默认为get</span></div><div class="line">    <span class="keyword">var</span> type = options.type == <span class="string">"post"</span> ? <span class="string">"post"</span> : <span class="string">"get"</span>;</div><div class="line">    <span class="comment">//如果没有传url，那就传当前地址</span></div><div class="line">    <span class="keyword">var</span> url = options.url || location.pathname;</div><div class="line">    <span class="comment">//如果参数不是false，那就默认是true，发异步请求</span></div><div class="line">    <span class="keyword">var</span> <span class="keyword">async</span> = options.async == <span class="literal">false</span> ? <span class="literal">false</span> : <span class="literal">true</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> params = <span class="keyword">this</span>.getParams(options.data);</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    </div><div class="line">    <span class="comment">//设置请求行</span></div><div class="line">    <span class="keyword">if</span> (type == <span class="string">"get"</span>) &#123;</div><div class="line">      url = url + <span class="string">"?"</span> + params;</div><div class="line">    &#125;</div><div class="line">    xhr.open(type, url, <span class="keyword">async</span>);</div><div class="line">    </div><div class="line">    <span class="comment">//设置请求头</span></div><div class="line">    <span class="keyword">if</span> (type == <span class="string">"post"</span>) &#123;</div><div class="line">      xhr.setRequestHeader(<span class="string">"content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//设置请求参数</span></div><div class="line">    xhr.send(params);</div><div class="line">    </div><div class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (xhr.status == <span class="number">200</span>) &#123;</div><div class="line">          <span class="comment">/*根据响应头的content-type属性指定方法接收到的内容*/</span></div><div class="line">          <span class="keyword">var</span> contentType = xhr.getResponseHeader(<span class="string">'content-type'</span>);</div><div class="line">          <span class="keyword">var</span> data = <span class="literal">null</span>;</div><div class="line">          <span class="keyword">if</span> (contentType.indexOf(<span class="string">'json'</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">            data = <span class="built_in">JSON</span>.parse(xhr.responseText);</div><div class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (contentType.indexOf(<span class="string">'xml'</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">            data = xhr.responseXML;</div><div class="line">          &#125; <span class="keyword">else</span> &#123;</div><div class="line">            data = xhr.responseText;</div><div class="line">          &#125;</div><div class="line">          <span class="comment">/*执行成功函数*/</span></div><div class="line">          options.success &amp;&amp; options.success(data);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          options.error &amp;&amp; options.error(xhr.responseText);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  getParams: <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="comment">//将obj对象转换成参数</span></div><div class="line">    <span class="comment">//将对象转换成参数列表</span></div><div class="line">    <span class="keyword">if</span> (!obj) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj) &#123;</div><div class="line">      arr.push(k + <span class="string">"="</span> + obj[k]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> arr.join(<span class="string">"&amp;"</span>);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>【登录案例】</p>
+<h2 id="jQuery中的ajax方法"><a href="#jQuery中的ajax方法" class="headerlink" title="jQuery中的ajax方法"></a>jQuery中的ajax方法</h2><blockquote>
+<p>jQuery为我们提供了更强大的Ajax封装</p>
+</blockquote>
+<h3 id="ajax"><a href="#ajax" class="headerlink" title="$.ajax"></a>$.ajax</h3><p>参数列表</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>描述</th>
+<th>取值</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>接口地址</td>
+<td></td>
+<td>url:”02.php”</td>
+</tr>
+<tr>
+<td>type</td>
+<td>请求方式</td>
+<td>get/post</td>
+<td>type:”get”</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>超时时间</td>
+<td>单位秒</td>
+<td>timeout:5000</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td>服务器返回的格式</td>
+<td>json/xml/text(默认)</td>
+<td>dataType:”json”</td>
+</tr>
+<tr>
+<td>data</td>
+<td>发送的请求数据</td>
+<td>对象</td>
+<td>data:{name:”zs”, age:18}</td>
+</tr>
+<tr>
+<td>beforeSend</td>
+<td>调用前的回调函数</td>
+<td>function(){}</td>
+<td>beforeSend:function(){ alert(1) }</td>
+</tr>
+<tr>
+<td>success</td>
+<td>成功的回调函数</td>
+<td>function (data) {}</td>
+<td>success:function (data) {}</td>
+</tr>
+<tr>
+<td>error</td>
+<td>失败的回调函数</td>
+<td>function (error) {}</td>
+<td>error:function(data) {}</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>完成后的回调函数</td>
+<td>function () {}</td>
+<td>complete:function () {}</td>
+</tr>
+</tbody>
+</table>
+<p>使用示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">  type:<span class="string">"get"</span>,<span class="comment">//请求类型</span></div><div class="line">  url:<span class="string">"02.php"</span>,<span class="comment">//请求地址</span></div><div class="line">  data:&#123;<span class="attr">name</span>:<span class="string">"zs"</span>, <span class="attr">age</span>:<span class="number">18</span>&#125;,<span class="comment">//请求数据</span></div><div class="line">  dataType:<span class="string">"json"</span>,<span class="comment">//希望接受的数据类型</span></div><div class="line">  timeout:<span class="number">5000</span>,<span class="comment">//设置超时时间</span></div><div class="line">  beforeSend:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//alert("发送前调用");</span></div><div class="line">  &#125;,</div><div class="line">  success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="comment">//alert("成功时调用");</span></div><div class="line">    <span class="built_in">console</span>.log(data);</div><div class="line">  &#125;,</div><div class="line">  error:<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">    <span class="comment">//alert("失败时调用");</span></div><div class="line">    <span class="built_in">console</span>.log(error);</div><div class="line">  &#125;,</div><div class="line">  complete:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//alert("请求完成时调用");</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>【案例：登录案例.html】</p>
+<p>【案例：获取表格数据.html】</p>
+<h3 id="其他api"><a href="#其他api" class="headerlink" title="其他api"></a>其他api</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//$.post(options);只发送post请求</span></div><div class="line"><span class="comment">//$.get(options);//只发送get请求</span></div><div class="line"><span class="comment">//$.getJson(url,callback);//获取服务器端的json文件</span></div><div class="line"><span class="comment">//$.getScript(url,callback);//载入服务器端的js文件，（动态加载js文件）</span></div><div class="line"><span class="comment">//$.load(url);//载入一个服务器端的html页面。</span></div></pre></td></tr></table></figure>
+<h3 id="接口化开发"><a href="#接口化开发" class="headerlink" title="接口化开发"></a>接口化开发</h3><p>请求地址即所谓的接口，通常我们所说的接口化开发，其实是指一个接口对应一个功能， 并且严格约束了请求参数和响应结果的格式，这样前后端在开发过程中，可以减少不必要的讨论， 从而并行开发，可以极大的提升开发效率，另外一个好处，当网站进行改版后，服务端接口进行调整时，并不影响到前端的功能。</p>
+<h4 id="获取短信验证码接口"><a href="#获取短信验证码接口" class="headerlink" title="获取短信验证码接口"></a>获取短信验证码接口</h4><p><strong>需求文档</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//总需求：点击发送按钮，向服务端发送请求</span></div><div class="line"><span class="comment">//需求1：格式校验</span></div><div class="line">  <span class="comment">//1. 手机号码不能为空   如果为空提示"手机号不能为空"</span></div><div class="line">  <span class="comment">//2. 手机号码格式必须正确,     提示"请输入正确的手机号码"</span></div><div class="line"><span class="comment">//需求2：点击发送时，按钮显示为"发送中",并且不能重复提交请求</span></div><div class="line"><span class="comment">//需求3：根据不同的响应结果，进行响应。</span></div><div class="line">  <span class="comment">//1. 如果接口调用成功</span></div><div class="line">      <span class="comment">//如果响应代码为100，倒计时</span></div><div class="line">      <span class="comment">//如果响应代码为101，提示手机号重复</span></div><div class="line">  <span class="comment">//2. 如果接口调用失败，告诉用户"服务器繁忙，请稍候再试"</span></div></pre></td></tr></table></figure>
+<p><strong>接口文档</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接口说明：获取短信验证码</span></div><div class="line"><span class="comment">//接口地址：getCode.php</span></div><div class="line"><span class="comment">//请求方式：get</span></div><div class="line"><span class="comment">//接口传参：mobile 手机号</span></div><div class="line"><span class="comment">//返回类型  json</span></div><div class="line"><span class="comment">//接口返回：&#123;"code":"101","msg":"手机号码存在", "mobile":"18511249258"&#125;</span></div><div class="line">        <span class="comment">//code 当前业务逻辑的处理成功失败的标识  100:成功   101:手机号码存在</span></div><div class="line">        <span class="comment">//msg  当前系统返回给前端提示</span></div><div class="line">        <span class="comment">//mobile  当前的手机号码</span></div></pre></td></tr></table></figure>
+<h4 id="注册接口"><a href="#注册接口" class="headerlink" title="注册接口"></a>注册接口</h4><p><strong>表单序列化</strong></p>
+<p>jquery提供了一个<code>serialize()</code>方法序列化表单，说白就是将表单中带有name属性的所有参数拼成一个格式为<code>name=value&amp;name1=value1</code>这样的字符串。方便我们获取表单的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//serialize将表单参数序列化成一个字符串。必须指定name属性</span></div><div class="line"><span class="comment">//name=hucc&amp;pass=123456&amp;repass=123456&amp;mobile=18511249258&amp;code=1234</span></div><div class="line">$(<span class="string">'form'</span>).serialize();</div><div class="line"></div><div class="line"><span class="comment">//serializeArray将表单序列化成一个数组，必须指定name属性</span></div><div class="line"><span class="comment">//[&#123;name:"name", value:"hucc"&#125;,&#123;name:"pass", value:"123456"&#125;,&#123;name:"repass", value:"123456"&#125;,&#123;name:"mobile", value:"18511241111"&#125;, &#123;name:"code", value:"1234"&#125;]</span></div><div class="line">$(<span class="string">'form'</span>).serializeArray();</div></pre></td></tr></table></figure>
+<p><strong>jquery的ajax方法，data参数能够直接识别表单序列化的数据<code>data:$(&#39;form&#39;).serializeArray()</code></strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$.post(&#123;</div><div class="line">  url:<span class="string">"register.php"</span>,</div><div class="line">  data:$(<span class="string">'form'</span>).serializeArray(),</div><div class="line">  dataType:<span class="string">'json'</span>,</div><div class="line">  success:<span class="function"><span class="keyword">function</span> (<span class="params">info</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(info);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>需求文档</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//注册功能</span></div><div class="line"><span class="comment">//总需求：点击注册按钮，向服务端发送请求</span></div><div class="line"><span class="comment">//需求1:表单校验</span></div><div class="line">  <span class="comment">//1.1 用户名不能为空，否则提示"请输入用户名"</span></div><div class="line">  <span class="comment">//1.2 密码不能为空，否则提示"请输入密码"</span></div><div class="line">  <span class="comment">//1.3 确认密码必须与密码一直，否则提示"确认密码与密码不一致"</span></div><div class="line">  <span class="comment">//1.4 手机号码不能为空，否则提示"请输入手机号码";</span></div><div class="line">  <span class="comment">//1.5 手机号码格式必须正确，否则提示"手机号格式错误"</span></div><div class="line">  <span class="comment">//1.6 短信验证码必须是4位的数字，否则提示"验证码格式错误"</span></div><div class="line"><span class="comment">//需求2：点击注册按钮时，按钮显示为"注册中...",并且不能重复提交请求</span></div><div class="line"><span class="comment">//需求3：根据不同响应结果，处理响应</span></div><div class="line">  <span class="comment">//3.1 接口调用成功</span></div><div class="line">    <span class="comment">//100 提示用户注册成功，3s后跳转到首页</span></div><div class="line">    <span class="comment">//101 提示用户"用户名hucc已经存在"</span></div><div class="line">    <span class="comment">//102 提示用户"验证码错误"</span></div><div class="line">  <span class="comment">//3.1 接口调用失败，提示"服务器繁忙，请稍后再试",恢复按钮的值</span></div></pre></td></tr></table></figure>
+<p><strong>接口文档</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接口说明：注册</span></div><div class="line"><span class="comment">//接口地址：register.php</span></div><div class="line"><span class="comment">//请求方式：post</span></div><div class="line"><span class="comment">//接口传参：name:用户名 pass:密码 code:验证码  mobile:手机号</span></div><div class="line"><span class="comment">//返回类型  json</span></div><div class="line"><span class="comment">//接口返回：&#123;"code":"100","msg":"注册成功","name":"huccc"&#125;</span></div><div class="line">        <span class="comment">//code 当前业务逻辑的处理成功失败的标识  100:成功  101:用户存在 102:验证码错误</span></div><div class="line">        <span class="comment">//msg  当前系统返回给前端提示</span></div><div class="line">        <span class="comment">//name: 注册的用户名</span></div></pre></td></tr></table></figure>
+<h1 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h1><blockquote>
+<p>是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。</p>
+</blockquote>
+<h2 id="为什么要使用模板引擎"><a href="#为什么要使用模板引擎" class="headerlink" title="为什么要使用模板引擎"></a>为什么要使用模板引擎</h2><p>我们通过ajax获取到数据后，需要把数据渲染到页面，在学习模板引擎前，我们的做法是大量的拼接字符串，对于结构简单的页面，这么做还行，但是如果页面结构很复杂，使用拼串的话<strong>代码可阅读性非常的差，而且非常容易出错，后期代码维护也是相当的麻烦。</strong> </p>
+<p>【演示：使用拼串进行渲染的缺点.html】</p>
+<h2 id="常见的模板引擎"><a href="#常见的模板引擎" class="headerlink" title="常见的模板引擎"></a>常见的模板引擎</h2><p>BaiduTemplate：<a href="http://tangram.baidu.com/BaiduTemplate/" target="_blank" rel="external">http://tangram.baidu.com/BaiduTemplate/</a><br>velocity.js：<a href="https://github.com/shepherdwind/velocity.js/" target="_blank" rel="external">https://github.com/shepherdwind/velocity.js/</a><br>ArtTemplate：<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">https://github.com/aui/artTemplate</a></p>
+<p>artTemplate是使用最广泛，效率最高的模板引擎，需要大家掌握。</p>
+<h2 id="artTemplate的使用"><a href="#artTemplate的使用" class="headerlink" title="artTemplate的使用"></a>artTemplate的使用</h2><h3 id="artTemplate入门"><a href="#artTemplate入门" class="headerlink" title="artTemplate入门"></a>artTemplate入门</h3><p><strong>1.引入模板引擎的js文件</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"template-web.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
+<p><strong>2.准备模板</strong> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--</span></div><div class="line"><span class="comment">  指定了type为text/html后，这一段script标签并不会解析，也不会显示。</span></div><div class="line"><span class="comment">--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/html"</span> <span class="attr">id</span>=<span class="string">"myTmp"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>姓名：隔壁老王<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>年龄：18<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>技能：查水表<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>描述：年轻力气壮<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>3.准备数据</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//3. 准备数据,数据是后台获取的，可以随时变化</span></div><div class="line"><span class="keyword">var</span> json = &#123;</div><div class="line">  userName:<span class="string">"隔壁老王"</span>,</div><div class="line">  age:<span class="number">18</span>,</div><div class="line">  skill:<span class="string">"查水表"</span>,</div><div class="line">  desc:<span class="string">"年轻气壮"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>4.将模板与数据进行绑定</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一个参数：模板的id</span></div><div class="line"><span class="comment">//第二个参数：数据</span></div><div class="line"><span class="comment">//返回值：根据模板生成的字符串。</span></div><div class="line"><span class="keyword">var</span> html = template(<span class="string">"myTmp"</span>, json);</div><div class="line"><span class="built_in">console</span>.log(html);</div></pre></td></tr></table></figure>
+<p><strong>5.修改模板</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/html"</span> <span class="attr">id</span>=<span class="string">"myTmp"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>姓名：&#123;&#123;userName&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>年龄：&#123;&#123;age&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>技能：&#123;&#123;skill&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>描述：&#123;&#123;desc&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>6.将数据显示到页面</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.querySelector(<span class="string">"div"</span>);</div><div class="line">div.innerHTML = html;</div></pre></td></tr></table></figure>
+<h3 id="artTemplate语法"><a href="#artTemplate语法" class="headerlink" title="artTemplate语法"></a>artTemplate语法</h3><p><strong>if语法</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;if gender='男'&#125;&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"man"</span>&gt;</span></div><div class="line">&#123;&#123;else&#125;&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"woman"</span>&gt;</span></div><div class="line">&#123;&#123;/if&#125;&#125;</div></pre></td></tr></table></figure>
+<p><strong>each语法</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--</span></div><div class="line"><span class="comment">  1. &#123;&#123;each data&#125;&#125;  可以通过$value 和 $index获取值和下标</span></div><div class="line"><span class="comment">  2. &#123;&#123;each data v i&#125;&#125;  自己指定值为v，下标为i</span></div><div class="line"><span class="comment">--&gt;</span></div><div class="line">&#123;&#123;each data v i&#125;&#125;</div><div class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123;v.url&#125;&#125;"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;v.src&#125;&#125;"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;v.content&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&#123;&#123;/each&#125;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//如果返回的数据是个数组，必须使用对象进行包裹，因为在&#123;&#123;&#125;&#125;中只写书写对象的属性。</span></div><div class="line"><span class="keyword">var</span> html = template(<span class="string">"navTmp"</span>, &#123;<span class="attr">data</span>:info&#125;);</div></pre></td></tr></table></figure>
+<p>【案例：京东导航】</p>
+<p>【案例：祝愿墙】</p>
+<p>【案例：什么值得买】</p>
+<h1 id="瀑布流案例"><a href="#瀑布流案例" class="headerlink" title="瀑布流案例"></a>瀑布流案例</h1><h1 id="同源与跨域"><a href="#同源与跨域" class="headerlink" title="同源与跨域"></a>同源与跨域</h1><h1 id="综合案例"><a href="#综合案例" class="headerlink" title="综合案例"></a>综合案例</h1>
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#服务器"><span class="toc-number">1.</span> <span class="toc-text">服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器软件"><span class="toc-number">1.1.</span> <span class="toc-text">服务器软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器类型"><span class="toc-number">1.2.</span> <span class="toc-text">服务器类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP服务器"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器总结"><span class="toc-number">1.4.</span> <span class="toc-text">服务器总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#客户端"><span class="toc-number">2.</span> <span class="toc-text">客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端软件"><span class="toc-number">2.1.</span> <span class="toc-text">客户端软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器与客户端的关系"><span class="toc-number">2.2.</span> <span class="toc-text">服务器与客户端的关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#软件架构"><span class="toc-number">3.</span> <span class="toc-text">软件架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CS架构"><span class="toc-number">3.1.</span> <span class="toc-text">CS架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BS架构"><span class="toc-number">3.2.</span> <span class="toc-text">BS架构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络基础"><span class="toc-number">4.</span> <span class="toc-text">网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址"><span class="toc-number">4.1.</span> <span class="toc-text">ip地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名"><span class="toc-number">4.2.</span> <span class="toc-text">域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS服务器"><span class="toc-number">4.3.</span> <span class="toc-text">DNS服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端口"><span class="toc-number">4.4.</span> <span class="toc-text">端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地hosts"><span class="toc-number">4.5.</span> <span class="toc-text">本地hosts</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建HTTP服务器"><span class="toc-number">5.</span> <span class="toc-text">搭建HTTP服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy介绍"><span class="toc-number">5.1.</span> <span class="toc-text">phpStudy介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy的安装"><span class="toc-number">5.2.</span> <span class="toc-text">phpStudy的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy的错误解决"><span class="toc-number">5.3.</span> <span class="toc-text">phpStudy的错误解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iis服务器"><span class="toc-number">5.3.1.</span> <span class="toc-text">关闭iis服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提示缺少vc9-库文件"><span class="toc-number">5.3.2.</span> <span class="toc-text">提示缺少vc9 库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭防火墙"><span class="toc-number">5.3.3.</span> <span class="toc-text">关闭防火墙</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpStudy的配置"><span class="toc-number">5.4.</span> <span class="toc-text">phpStudy的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改网站目录与默认首页"><span class="toc-number">5.4.1.</span> <span class="toc-text">修改网站目录与默认首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟主机配置"><span class="toc-number">5.4.2.</span> <span class="toc-text">虚拟主机配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP基础"><span class="toc-number">6.</span> <span class="toc-text">PHP基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#php初体验"><span class="toc-number">6.1.</span> <span class="toc-text">php初体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">6.2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">6.3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单数据类型"><span class="toc-number">6.3.1.</span> <span class="toc-text">简单数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">6.3.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">6.3.3.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">6.3.4.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">6.4.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断语句"><span class="toc-number">6.4.1.</span> <span class="toc-text">判断语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环语句"><span class="toc-number">6.4.2.</span> <span class="toc-text">循环语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表单处理"><span class="toc-number">6.5.</span> <span class="toc-text">表单处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件上传"><span class="toc-number">6.5.1.</span> <span class="toc-text">文件上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP常用函数"><span class="toc-number">6.6.</span> <span class="toc-text">PHP常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态页面"><span class="toc-number">6.7.</span> <span class="toc-text">动态页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用php动态渲染页面"><span class="toc-number">6.7.1.</span> <span class="toc-text">使用php动态渲染页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include"><span class="toc-number">6.7.2.</span> <span class="toc-text">include</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.8.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http协议"><span class="toc-number">7.</span> <span class="toc-text">http协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求与请求报文"><span class="toc-number">7.1.</span> <span class="toc-text">请求与请求报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应与响应报文"><span class="toc-number">7.2.</span> <span class="toc-text">响应与响应报文</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AJAX"><span class="toc-number">8.</span> <span class="toc-text">AJAX</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#同步与异步"><span class="toc-number">8.1.</span> <span class="toc-text">同步与异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest"><span class="toc-number">8.2.</span> <span class="toc-text">XMLHttpRequest</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#发送get请求"><span class="toc-number">8.2.1.</span> <span class="toc-text">发送get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送post请求"><span class="toc-number">8.2.2.</span> <span class="toc-text">发送post请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取响应"><span class="toc-number">8.2.3.</span> <span class="toc-text">获取响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-number">8.2.4.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据交互"><span class="toc-number">8.3.</span> <span class="toc-text">数据交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XML"><span class="toc-number">8.3.1.</span> <span class="toc-text">XML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON数据"><span class="toc-number">8.3.2.</span> <span class="toc-text">JSON数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#php处理json"><span class="toc-number">8.3.2.1.</span> <span class="toc-text">php处理json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS处理json"><span class="toc-number">8.3.2.2.</span> <span class="toc-text">JS处理json</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval方法"><span class="toc-number">8.3.3.</span> <span class="toc-text">eval方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性处理"><span class="toc-number">8.4.</span> <span class="toc-text">兼容性处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封装ajax工具函数"><span class="toc-number">8.5.</span> <span class="toc-text">封装ajax工具函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参数提取"><span class="toc-number">8.5.1.</span> <span class="toc-text">参数提取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数检测"><span class="toc-number">8.5.2.</span> <span class="toc-text">参数检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整版"><span class="toc-number">8.5.3.</span> <span class="toc-text">完整版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jQuery中的ajax方法"><span class="toc-number">8.6.</span> <span class="toc-text">jQuery中的ajax方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax"><span class="toc-number">8.6.1.</span> <span class="toc-text">$.ajax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他api"><span class="toc-number">8.6.2.</span> <span class="toc-text">其他api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口化开发"><span class="toc-number">8.6.3.</span> <span class="toc-text">接口化开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取短信验证码接口"><span class="toc-number">8.6.3.1.</span> <span class="toc-text">获取短信验证码接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注册接口"><span class="toc-number">8.6.3.2.</span> <span class="toc-text">注册接口</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模板引擎"><span class="toc-number">9.</span> <span class="toc-text">模板引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要使用模板引擎"><span class="toc-number">9.1.</span> <span class="toc-text">为什么要使用模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的模板引擎"><span class="toc-number">9.2.</span> <span class="toc-text">常见的模板引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#artTemplate的使用"><span class="toc-number">9.3.</span> <span class="toc-text">artTemplate的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#artTemplate入门"><span class="toc-number">9.3.1.</span> <span class="toc-text">artTemplate入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#artTemplate语法"><span class="toc-number">9.3.2.</span> <span class="toc-text">artTemplate语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#瀑布流案例"><span class="toc-number">10.</span> <span class="toc-text">瀑布流案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#同源与跨域"><span class="toc-number">11.</span> <span class="toc-text">同源与跨域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#综合案例"><span class="toc-number">12.</span> <span class="toc-text">综合案例</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/18/http服务与ajax编程/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&text="><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&is_video=false&description="><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://yoursite.com/2017/08/18/http服务与ajax编程/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&title="><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/18/http服务与ajax编程/&name=&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 liwei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/tzvetkov75">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>
