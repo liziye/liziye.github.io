@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="插件常用插件 插件：jquery不可能包含所有的功能，我们可以通过插件扩展jquery的功能。 jQuery有着丰富的插件，使用这些插件能给jQuery提供一些额外的功能。  jquery.color.js animate不支持颜色的渐变，但是使用了jquery.color.js后，就可以支持颜色的渐变了。  使用插件的步骤1231. 引入jQuery文件2. 引入插件（如果有用到css的话，需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="洒脱">
+<meta property="og:url" content="http://yoursite.com/2017/08/22/jquery插件的封装/index.html">
+<meta property="og:site_name" content="洒脱">
+<meta property="og:description" content="插件常用插件 插件：jquery不可能包含所有的功能，我们可以通过插件扩展jquery的功能。 jQuery有着丰富的插件，使用这些插件能给jQuery提供一些额外的功能。  jquery.color.js animate不支持颜色的渐变，但是使用了jquery.color.js后，就可以支持颜色的渐变了。  使用插件的步骤1231. 引入jQuery文件2. 引入插件（如果有用到css的话，需要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-04-11T16:39:46.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="洒脱">
+<meta name="twitter:description" content="插件常用插件 插件：jquery不可能包含所有的功能，我们可以通过插件扩展jquery的功能。 jQuery有着丰富的插件，使用这些插件能给jQuery提供一些额外的功能。  jquery.color.js animate不支持颜色的渐变，但是使用了jquery.color.js后，就可以支持颜色的渐变了。  使用插件的步骤1231. 引入jQuery文件2. 引入插件（如果有用到css的话，需要">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>洒脱</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="banner">
+<div id="blogtitel" class="blogtitel">洒脱</div>
+<ul id="wrapper" class="wrapper">
+  <div class="sun">
+    <div class="star"></div>
+  </div>
+  <div class="mercury">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="venus">
+    <div class="planet">
+      <div class="shadow"></div>
+    </div>
+  </div>
+  <div class="earth">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="mars">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+  <div class="jupiter">
+    <div class="planet"><div class="shadow"></div></div>
+  </div>
+</ul>
+</div>
+
+    <div class="background">
+      
+        <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://liziye.github.io/">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/08/18/http服务与ajax编程/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/22/jquery插件的封装/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/22/jquery插件的封装/&text="><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/22/jquery插件的封装/&is_video=false&description="><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://yoursite.com/2017/08/22/jquery插件的封装/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/22/jquery插件的封装/&name=&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#插件"><span class="toc-number">1.</span> <span class="toc-text">插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用插件"><span class="toc-number">1.1.</span> <span class="toc-text">常用插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery-color-js"><span class="toc-number">1.1.1.</span> <span class="toc-text">jquery.color.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery-lazyload-js"><span class="toc-number">1.1.2.</span> <span class="toc-text">jquery.lazyload.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery-ui-js插件"><span class="toc-number">1.1.3.</span> <span class="toc-text">jquery.ui.js插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作jquery插件"><span class="toc-number">1.2.</span> <span class="toc-text">制作jquery插件</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+      
+      <div class="content index width mx-auto px2 my4">
+          
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">洒脱</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-22T13:51:42.898Z" itemprop="datePublished">2017-08-22</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h2><blockquote>
+<p>插件：jquery不可能包含所有的功能，我们可以通过插件扩展jquery的功能。</p>
+<p>jQuery有着丰富的插件，使用这些插件能给jQuery提供一些额外的功能。</p>
+</blockquote>
+<h3 id="jquery-color-js"><a href="#jquery-color-js" class="headerlink" title="jquery.color.js"></a>jquery.color.js</h3><blockquote>
+<p>animate不支持颜色的渐变，但是使用了jquery.color.js后，就可以支持颜色的渐变了。</p>
+</blockquote>
+<p>使用插件的步骤<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 引入jQuery文件</div><div class="line"><span class="number">2.</span> 引入插件（如果有用到css的话，需要引入css）</div><div class="line"><span class="number">3.</span> 使用插件</div></pre></td></tr></table></figure></p>
+<h3 id="jquery-lazyload-js"><a href="#jquery-lazyload-js" class="headerlink" title="jquery.lazyload.js"></a>jquery.lazyload.js</h3><p>懒加载插件</p>
+<h3 id="jquery-ui-js插件"><a href="#jquery-ui-js插件" class="headerlink" title="jquery.ui.js插件"></a>jquery.ui.js插件</h3><p>jQueryUI专指由jQuery官方维护的UI方向的插件。</p>
+<p>官方API：<a href="http://api.jqueryui.com/category/all/" target="_blank" rel="external">http://api.jqueryui.com/category/all/</a></p>
+<p>其他教程：<a href="http://www.runoob.com/jqueryui/jqueryui-tutorial.html" target="_blank" rel="external">jQueryUI教程</a></p>
+<p>基本使用:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">2.</span>	<span class="number">1.</span>	引入jQueryUI的样式文件</div><div class="line"><span class="number">2.</span>	引入jQuery</div><div class="line"><span class="number">3.</span>	引入jQueryUI的js文件</div><div class="line"><span class="number">4.</span>	使用jQueryUI功能</div></pre></td></tr></table></figure></p>
+<p>使用jquery.ui.js实现新闻模块的案例</p>
+<h2 id="制作jquery插件"><a href="#制作jquery插件" class="headerlink" title="制作jquery插件"></a>制作jquery插件</h2><blockquote>
+<p>原理：jquery插件其实说白了就是给jquery对象增加一个新的方法，让jquery对象拥有某一个功能。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//通过给$.fn添加方法就能够扩展jquery对象</span></div><div class="line">$.fn. pluginName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div></pre></td></tr></table></figure>
+<p>制作手风琴插件</p>
+
+  </div>
+</article>
+
+
+
+      </div>
+      
+       <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://liziye.github.io/">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#插件"><span class="toc-number">1.</span> <span class="toc-text">插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用插件"><span class="toc-number">1.1.</span> <span class="toc-text">常用插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery-color-js"><span class="toc-number">1.1.1.</span> <span class="toc-text">jquery.color.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery-lazyload-js"><span class="toc-number">1.1.2.</span> <span class="toc-text">jquery.lazyload.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery-ui-js插件"><span class="toc-number">1.1.3.</span> <span class="toc-text">jquery.ui.js插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作jquery插件"><span class="toc-number">1.2.</span> <span class="toc-text">制作jquery插件</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/08/22/jquery插件的封装/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/08/22/jquery插件的封装/&text="><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/08/22/jquery插件的封装/&is_video=false&description="><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://yoursite.com/2017/08/22/jquery插件的封装/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/08/22/jquery插件的封装/&title="><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/08/22/jquery插件的封装/&name=&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      
+      <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 liwei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/home/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://liziye.github.io/">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+      <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+    </div>
+</body>
+</html>
